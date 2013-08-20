@@ -1,0 +1,19 @@
+FORGE
+  remote: http://forge.puppetlabs.com
+  specs:
+    alup/rbenv (1.2.0)
+    puppetlabs/stdlib (4.1.0)
+
+GIT
+  remote: https://github.com/jfryman/puppet-nginx
+  ref: master
+  sha: 304c12974ebb29d593ccfee634ddcfe37d1da57a
+  specs:
+    nginx (0.0.3)
+      puppetlabs/stdlib (>= 0.1.6)
+
+DEPENDENCIES
+  alup/rbenv (>= 0)
+  nginx (>= 0)
+  puppetlabs/stdlib (>= 0)
+
