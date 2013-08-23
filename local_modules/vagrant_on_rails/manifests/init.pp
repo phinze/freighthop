@@ -1,6 +1,7 @@
 class vagrant_on_rails(
   $databases,
   $database_users,
+  $packages     = ['git-core'],
   $ruby_version = $vagrant_on_rails::params::ruby_version,
   $app_name     = $vagrant_on_rails::params::app_name,
   $app_root     = $vagrant_on_rails::params::app_root,
@@ -30,24 +31,6 @@ class vagrant_on_rails(
   class { 'vagrant_on_rails::pkgs':
     packages => $packages,
   }
-
-  package { 'git-core': ensure => installed }
-
-  package { [
-    'build-essential',
-    'imagemagick',
-    'libcurl4-gnutls-dev',
-    'libmysqlclient-dev',
-    'libpq-dev',
-    'libsqlite3-dev',
-    'libxml2-dev',
-    'libxmlsec1',
-    'libxmlsec1-dev',
-    'libxslt1-dev',
-    'nodejs',
-    'openjdk-7-jre',
-    'zlib1g-dev',
-  ]: ensure => installed }
 
   exec { 'bundle install':
     cwd       => $app_root,

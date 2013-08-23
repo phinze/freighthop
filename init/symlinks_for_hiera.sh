@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 
 HIERA_BASE="/etc/vagrant_on_rails/hiera_data"

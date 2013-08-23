@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node_config.vm.provision :shell, path: 'init/bootstrap_puppet_omnibus.sh'
 
     node_config.vm.provision :shell do |s|
-      s.path = 'init/symlink_for_hiera.sh'
+      s.path = 'init/symlinks_for_hiera.sh'
       s.args = VagrantOnRails.guest_rails_root
     end
 
