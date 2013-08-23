@@ -10,10 +10,9 @@ module VagrantOnRails
       !!(defined? HashiCorp)
     end
 
-    def rails_root
+    def host_rails_root
       @rails_root ||= begin
         Pathname.pwd.tap do |pwd|
-          puts "PWD IS #{pwd}"
           unless pwd.join('config', 'boot.rb').file?
             raise 'run me with a rails app as PWD, using VAGRANT_CWD to refer to my directory'
           end
@@ -21,8 +20,12 @@ module VagrantOnRails
       end
     end
 
+    def guest_rails_root
+      "/srv/#{app_name}"
+    end
+
     def app_name
-      @app_name ||= rails_root.basename.to_s
+      @app_name ||= host_rails_root.basename.to_s
     end
 
     def hostname

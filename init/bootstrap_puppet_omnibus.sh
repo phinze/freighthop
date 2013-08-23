@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OMNIBUS_PACKAGE_PATH='/opt/puppet-omnibus.deb'
+OMNIBUS_PACKAGE_PATH='/vagrant/puppet-omnibus.deb'
 OMNIBUS_PACKAGE_URL='https://dl.dropboxusercontent.com/u/12210925/apt/puppet-omnibus_3.1.0%2Bfpm5_amd64.deb'
 APT_CACHE='/var/cache/apt/pkgcache.bin'
 ONE_DAY=$(( 24 * 60 * 60 ))

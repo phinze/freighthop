@@ -1,8 +1,20 @@
 FORGE
   remote: http://forge.puppetlabs.com
   specs:
-    alup/rbenv (1.2.0)
+    gdsoperations/rbenv (1.0.1)
+    ploperations/bundler (1.0.0)
+    ploperations/unicorn (1.0.0)
+      ploperations/bundler (>= 0.0.1)
+    puppetlabs/apt (1.2.0)
+      puppetlabs/stdlib (>= 2.2.1)
+    puppetlabs/firewall (0.4.0)
+    puppetlabs/postgresql (2.4.1)
+      puppetlabs/apt (< 2.0.0, >= 1.1.0)
+      puppetlabs/firewall (>= 0.0.4)
+      puppetlabs/stdlib (< 5.0.0, >= 3.2.0)
+      ripienaar/concat (>= 0.2.0)
     puppetlabs/stdlib (4.1.0)
+    ripienaar/concat (0.2.0)
 
 GIT
   remote: https://github.com/jfryman/puppet-nginx
@@ -12,8 +24,17 @@ GIT
     nginx (0.0.3)
       puppetlabs/stdlib (>= 0.1.6)
 
+PATH
+  remote: local_modules/vagrant_on_rails
+  specs:
+    vagrant_on_rails (0.0.1)
+
 DEPENDENCIES
-  alup/rbenv (>= 0)
+  gdsoperations/rbenv (>= 0)
   nginx (>= 0)
+  ploperations/unicorn (>= 0)
+  puppetlabs/apt (>= 0)
+  puppetlabs/postgresql (>= 0)
   puppetlabs/stdlib (>= 0)
+  vagrant_on_rails (>= 0)
 

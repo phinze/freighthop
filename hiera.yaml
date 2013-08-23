@@ -1,0 +1,8 @@
+---
+:backends:
+  - json
+:json:
+  :datadir: /etc/vagrant_on_rails/hiera_data
+:hierarchy:
+  - "app"
+  - "vagrant/common"
