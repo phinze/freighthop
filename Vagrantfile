@@ -9,6 +9,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = 'precise64'
   config.vm.box_url = VagrantOnRails.box_url 
   config.landrush.enable
+  config.cache.auto_detect = true
+  config.cache.enable_nfs = true
 
   config.vm.define VagrantOnRails.app_name do |node_config|
     node_config.vm.hostname = VagrantOnRails.hostname

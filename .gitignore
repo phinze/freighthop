@@ -2,3 +2,4 @@
 modules/
 .vagrant/
 .librarian/
+puppet-omnibus.deb

@@ -33,10 +33,33 @@ class vagrant_on_rails(
   }
 
   exec { 'bundle install':
-    cwd       => $app_root,
-    path      => ['/bin', '/usr/bin', '/usr/lib/rbenv/shims'],
-    logoutput => true,
-    timeout   => 0,
-    unless    => 'bundle check'
+    environment => [
+      'BUNDLE_GEMFILE=Gemfile.vagrant-on-rails',
+      'RBENV_ROOT=/usr/lib/rbenv',
+      "RBENV_VERSION=${ruby_version}",
+    ],
+    cwd         => $app_root,
+    path        => [
+      '/usr/lib/rbenv/shims',
+      '/usr/bin',
+      '/bin',
+    ],
+    logoutput   => true,
+    timeout     => 0,
+    unless      => 'bundle check',
   }
+
+  class { 'vagrant_on_rails::puma':
+    app_root    => $app_root,
+    socket_path => $socket_path,
+  }
+
+  File[$socket_dir] ->
+    Class['vagrant_on_rails::pkgs'] ->
+    Class['vagrant_on_rails::rbenv'] ->
+    Class['vagrant_on_rails::nginx'] ->
+    Class['vagrant_on_rails::postgres'] ->
+    Exec['bundle install'] ->
+    Class['vagrant_on_rails::puma']
+
 }
