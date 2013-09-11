@@ -18,6 +18,9 @@ class freighthop(
     group  => 'vagrant',
     mode   => '0755'
   }
+  class { 'freighthop::pkgs':
+    packages => $packages,
+  }
   class { 'freighthop::rbenv':
     ruby_version => $ruby_version
   }
@@ -32,27 +35,10 @@ class freighthop(
     databases      => $databases,
     database_users => $database_users,
   }
-  class { 'freighthop::pkgs':
-    packages => $packages,
+  class { 'freighthop::bundler':
+    ruby_version => $ruby_version,
+    app_root     => $app_root,
   }
-
-  exec { 'bundle install':
-    environment => [
-      'BUNDLE_GEMFILE=Gemfile.freighthop',
-      'RBENV_ROOT=/usr/lib/rbenv',
-      "RBENV_VERSION=${ruby_version}",
-    ],
-    cwd         => $app_root,
-    path        => [
-      '/usr/lib/rbenv/shims',
-      '/usr/bin',
-      '/bin',
-    ],
-    logoutput   => true,
-    timeout     => 0,
-    unless      => 'bundle check',
-  }
-
   class { 'freighthop::puma':
     app_root    => $app_root,
     socket_path => $socket_path,
@@ -63,7 +49,7 @@ class freighthop(
     Class['freighthop::rbenv'] ->
     Class['freighthop::nginx'] ->
     Class['freighthop::postgres'] ->
-    Exec['bundle install'] ->
+    Class['freighthop::bundler'] ->
     Class['freighthop::puma']
 
 }
