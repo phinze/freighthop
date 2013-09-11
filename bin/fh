@@ -1,6 +1,16 @@
 #!/usr/bin/env ruby
 
-script_path = File.expand_path(File.dirname(__FILE__))
+FREIGHTHOP_VARGANT_DOTFILE_PATH = File.expand_path('~/.freighthop.d/vagrant')
+FREIGHTHOP_VARGANT_CWD          = File.expand_path(File.dirname(__FILE__))
+
+unless File.directory?(FREIGHTHOP_VARGANT_DOTFILE_PATH)
+  require 'fileutils'
+  FileUtils.mkdir_p(FREIGHTHOP_VARGANT_DOTFILE_PATH)
+end
+
+ENV['VAGRANT_DOTFILE_PATH'] = FREIGHTHOP_VARGANT_DOTFILE_PATH
+ENV['VAGRANT_CWD']          = FREIGHTHOP_VARGANT_CWD
+
 project_name = File.basename(Dir.pwd)
 project_dir = "/srv/#{project_name}"
 
@@ -16,19 +26,22 @@ def vagrant_ssh(cmd)
   "/usr/bin/vagrant ssh -c '#{Shellwords.escape(cmd)}'"
 end
 
+def console_command
+  if File.exist?('./bin/rails')
+    './bin/rails console'
+  elsif File.exist?('./script/console')
+    './script/console'
+  else
+    './script/rails console'
+  end
+end
+
 subcommand, *rest = ARGV
 case subcommand
 when 'run' then
   exec vagrant_ssh(as_root(in_project_root(rest.join(' '))))
 when 'console' then
   `vagrant ssh-config > /tmp/freighthop.ssh-config`
-  if File.exist?('./bin/rails')
-    console_command = './bin/rails console'
-  elsif File.exist?('./script/console')
-    console_command = './script/console'
-  else
-    console_command = './script/rails console'
-  end
   exec "ssh -t -F /tmp/freighthop.ssh-config #{project_name} 'sudo /bin/bash -l -c 'cd #{project_dir}; #{console_command} #{rest.join(' ')}'"
 when 'rake' then
   exec vagrant_ssh(as_root(in_project_dir("bundle exec rake #{rest.join(' ')}")))
