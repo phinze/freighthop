@@ -1,4 +1,4 @@
-class vagrant_on_rails::params {
+class freighthop::params {
   $ruby_version    = '1.9.3-p392'
   $app_name        = $::hostname
   $app_root        = "/srv/${app_name}"

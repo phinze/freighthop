@@ -1,4 +1,4 @@
-class vagrant_on_rails::rbenv(
+class freighthop::rbenv(
   $ruby_version
 ) {
   include apt
@@ -25,7 +25,7 @@ class vagrant_on_rails::rbenv(
   file { '/etc/profile.d/custom_bundler_gemfile.sh':
     ensure  => present,
     mode    => '0755',
-    content => template('vagrant_on_rails/profile/custom_bundler_gemfile.sh.erb'),
+    content => template('freighthop/profile/custom_bundler_gemfile.sh.erb'),
   }
 
   Exec {

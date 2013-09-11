@@ -1,4 +1,4 @@
-class vagrant_on_rails::postgres(
+class freighthop::postgres(
   $databases,
   $database_users
 ) {

@@ -1,4 +1,4 @@
-class vagrant_on_rails::nginx(
+class freighthop::nginx(
   $upstream_socket_path,
   $server_name,
   $web_root,
@@ -21,7 +21,7 @@ class vagrant_on_rails::nginx(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('vagrant_on_rails/nginx/vagrant-rails.conf.erb'),
+    content => template('freighthop/nginx/vagrant-rails.conf.erb'),
     notify  => Service['nginx'],
     require => Exec['generate-self-signed-ssl-cert'],
   }

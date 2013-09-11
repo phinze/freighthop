@@ -1,4 +1,4 @@
-class vagrant_on_rails::redis {
+class freighthop::redis {
   package { 'redis-server':
     ensure => installed
   }

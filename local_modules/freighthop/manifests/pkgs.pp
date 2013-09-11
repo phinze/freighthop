@@ -1,4 +1,4 @@
-class vagrant_on_rails::pkgs(
+class freighthop::pkgs(
   $packages
 ) {
   package { $packages:

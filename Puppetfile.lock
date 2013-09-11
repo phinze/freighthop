@@ -7,8 +7,8 @@ FORGE
       ploperations/bundler (>= 0.0.1)
     puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
-    puppetlabs/firewall (0.4.0)
-    puppetlabs/postgresql (2.4.1)
+    puppetlabs/firewall (0.4.2)
+    puppetlabs/postgresql (2.5.0)
       puppetlabs/apt (< 2.0.0, >= 1.1.0)
       puppetlabs/firewall (>= 0.0.4)
       puppetlabs/stdlib (< 5.0.0, >= 3.2.0)
@@ -19,22 +19,23 @@ FORGE
 GIT
   remote: https://github.com/jfryman/puppet-nginx
   ref: master
-  sha: 304c12974ebb29d593ccfee634ddcfe37d1da57a
+  sha: 30d62246b222ee91856843e20fda303fea996dcd
   specs:
-    nginx (0.0.3)
+    nginx (0.0.5)
+      puppetlabs/apt (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
 
 PATH
-  remote: local_modules/vagrant_on_rails
+  remote: local_modules/freighthop
   specs:
-    vagrant_on_rails (0.0.1)
+    freighthop (0.0.1)
 
 DEPENDENCIES
+  freighthop (>= 0)
   gdsoperations/rbenv (>= 0)
   nginx (>= 0)
   ploperations/unicorn (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/postgresql (>= 0)
   puppetlabs/stdlib (>= 0)
-  vagrant_on_rails (>= 0)
 

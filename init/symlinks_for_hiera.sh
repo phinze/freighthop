@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-HIERA_BASE="/etc/vagrant_on_rails/hiera_data"
+HIERA_BASE="/etc/freighthop/hiera_data"
 
-APP_HIERA_DATA_SOURCE="${1}/.vagrant_on_rails.json"
+APP_HIERA_DATA_SOURCE="${1}/.freighthop.json"
 APP_HIERA_DATA_TARGET="${HIERA_BASE}/app.json"
 
 VAGRANT_HIERA_DATA_SOURCE="/vagrant/data"

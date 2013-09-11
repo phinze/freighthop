@@ -11,5 +11,5 @@ mod 'ploperations/unicorn'
 
 mod 'puppetlabs/postgresql'
 
-mod 'vagrant_on_rails',
-  :path => 'local_modules/vagrant_on_rails'
+mod 'freighthop',
+  :path => 'local_modules/freighthop'

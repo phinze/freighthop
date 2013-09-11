@@ -1,4 +1,4 @@
-class vagrant_on_rails::puma(
+class freighthop::puma(
   $app_root,
   $socket_path,
 ) {
@@ -10,7 +10,7 @@ class vagrant_on_rails::puma(
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    content => template('vagrant_on_rails/puma/upstart/puma.conf.erb')
+    content => template('freighthop/puma/upstart/puma.conf.erb')
   }
   file { '/etc/puma.conf':
     owner   => 'root',
@@ -22,7 +22,7 @@ class vagrant_on_rails::puma(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => 'puppet:///modules/vagrant_on_rails/puma/upstart/puma-manager.conf',
+    source  => 'puppet:///modules/freighthop/puma/upstart/puma-manager.conf',
     require => [
       File['/etc/init/puma.conf'],
       File['/etc/puma.conf'],

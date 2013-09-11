@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require_relative 'lib/vagrant_on_rails'
+require_relative 'lib/freighthop'
 
 VAGRANTFILE_API_VERSION = "2"
 
