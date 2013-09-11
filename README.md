@@ -5,6 +5,14 @@ Don't you hate how your dev machine inevitably becomes the superset of all the d
 
 Vagrant is suppose to help us with this. Package everything in virtual machines, and your life will be amazing! That's the idea at least; but the actual mechanics of getting to that promised land are not all that clear.
 
+## What is Freighthop?
+
+Freighthop is based around this simple goal:
+
+> When I download a rails project, I want to run a single command that spins me up a VM serving that project.
+
+With a few commands from the project root of any Rack-compatible app, Freighthop can spin up a VM that serves that project at `projectname.vagrant.dev`. Freighthop takes care of the bundle install, the server configuration, and the database, and it provides a helper executable that allows you to interact with the VM.
+
 ----
 
 ## !! Alpha Work in Progress !!
@@ -13,11 +21,6 @@ Vagrant is suppose to help us with this. Package everything in virtual machines,
 
 ----
 
-## What is Freighthop?
-
-Freighthop is based around this simple goal:
-
-> When I download a rails project, I want to run a single command that spins me up a VM serving that project.
 
 ## Try it out
 
@@ -106,9 +109,25 @@ fh down
 
 And your host system is none the wiser! No databases lying around, no daemons hanging out forever in the background; squeaky clean!
 
+## `fh` - the friendly executable helper
+
+For now this is a tiny bash script that mostly just delegates down to `vagrant`. Here are the important commands from vagrant:
+
+ * `fh up` - start and provision the VM
+ * `fh provision` - kick off provisioning if you change your config or something breaks
+ * `fh ssh` - log into your VM
+ * `fh halt` - shut down the VM
+ * `fh destroy` - delete the VM
+
+And it also knows a few special commands of its own:
+
+ * `fh run '$COMMAND'` - run a command from the CWD of your project on the VM
+ * `fh console` - attempts to run a rails console inside the VM
+ * `fh rake $TASK` - runs a rake task in your project on the VM
+
 ## So much to do...
 
-Phew this little project could really use your help!
+We're just getting started; this little project could really use your help!
 
  * Try to get it running and report any problems you hit.
  * Check out existing issues for the list of things we're working on.
