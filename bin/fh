@@ -1,35 +1,37 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
-SCRIPT_PATH="${BASH_SOURCE[0]}";
-if ([ -h "${SCRIPT_PATH}" ]) then
-  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
-fi
-pushd . > /dev/null
-cd `dirname ${SCRIPT_PATH}` > /dev/null
-SCRIPT_PATH=`pwd`;
-popd  > /dev/null
+script_path = File.expand_path(File.dirname(__FILE__))
+project_name = File.basename(Dir.pwd)
+project_dir = "/srv/#{project_name}"
 
-export VAGRANT_CWD=$SCRIPT_PATH
-PROJ_NAME=$(basename $PWD)
-PROJ_ROOT="/srv/${PROJ_NAME}"
+def as_root(cmd)
+  "sudo /bin/bash -l -c '#{Shellwords.escape(cmd)}'"
+end
 
-if [[ $1 == 'run' ]]; then
-  shift
-  vagrant ssh -c "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; $*'"
-elif [[ $1 == 'console' ]]; then
-  shift
-  vagrant ssh-config > /tmp/freighthop.ssh-config
-  if [[ -f ./bin/rails ]]; then
-    CONSOLE_COMMAND="./bin/rails console"
-  elif [[ -f ./script/console ]]; then
-    CONSOLE_COMMAND="./script/console"
+def in_project_dir(cmd)
+  "cd #{project_dir}; #{cmd}"
+end
+
+def vagrant_ssh(cmd)
+  "/usr/bin/vagrant ssh -c '#{Shellwords.escape(cmd)}'"
+end
+
+subcommand, *rest = ARGV
+case subcommand
+when 'run' then
+  exec vagrant_ssh(as_root(in_project_root(rest.join(' '))))
+when 'console' then
+  `vagrant ssh-config > /tmp/freighthop.ssh-config`
+  if File.exist?('./bin/rails')
+    console_command = './bin/rails console'
+  elsif File.exist?('./script/console')
+    console_command = './script/console'
   else
-    CONSOLE_COMMAND="./script/rails console"
-  fi
-  ssh -t -F /tmp/freighthop.ssh-config $PROJ_NAME "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; ${CONSOLE_COMMAND} $*'"
-elif [[ $1 == 'rake' ]]; then
-  vagrant ssh -c "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; bundle exec rake $*'"
+    console_command = './script/rails console'
+  end
+  exec "ssh -t -F /tmp/freighthop.ssh-config #{project_name} 'sudo /bin/bash -l -c 'cd #{project_dir}; #{console_command} #{rest.join(' ')}'"
+when 'rake' then
+  exec vagrant_ssh(as_root(in_project_dir("bundle exec rake #{rest.join(' ')}")))
 else
-  vagrant "$@"
-fi
+  exec "/usr/bin/vagrant #{ARGV.join(' ')}"
+end
