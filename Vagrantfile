@@ -3,28 +3,32 @@
 
 require_relative 'lib/freighthop'
 
-VAGRANTFILE_API_VERSION = "2"
+Vagrant.require_plugin 'landrush'
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure('2') do |config|
   config.vm.box = 'precise64'
-  config.vm.box_url = VagrantOnRails.box_url 
-  config.landrush.enable
-  config.cache.auto_detect = true
-  config.cache.enable_nfs = true
+  config.vm.box_url = Freighthop.box_url 
 
-  config.vm.define VagrantOnRails.app_name do |node_config|
-    node_config.vm.hostname = VagrantOnRails.hostname
-    node_config.vm.network :private_network, ip: VagrantOnRails.ip_address
+  config.landrush.enable
+
+  if config.respond_to? :cache
+    config.cache.auto_detect = true
+    config.cache.enable_nfs = true
+  end
+
+  config.vm.define Freighthop.app_name do |node_config|
+    node_config.vm.hostname = Freighthop.hostname
+    node_config.vm.network :private_network, ip: Freighthop.ip_address
 
     node_config.vm.provider :vmware_fusion do |v|
-      v.vmx['displayName'] = VagrantOnRails.hostname
+      v.vmx['displayName'] = Freighthop.hostname
       v.vmx['memsize']     = 2048
       v.vmx['numvcpus']    = 4
     end
 
     node_config.vm.synced_folder(
-      VagrantOnRails.host_rails_root,
-      VagrantOnRails.guest_rails_root,
+      Freighthop.host_rails_root,
+      Freighthop.guest_rails_root,
       nfs: true
     )
 
@@ -32,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     node_config.vm.provision :shell do |s|
       s.path = 'init/symlinks_for_hiera.sh'
-      s.args = VagrantOnRails.guest_rails_root
+      s.args = Freighthop.guest_rails_root
     end
 
     puppet_options = [].tap do |options|
@@ -46,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.module_path = 'modules'
       puppet.manifest_file = 'site.pp'
       puppet.facter = {
-        'app_name' => VagrantOnRails.app_name
+        'app_name' => Freighthop.app_name
       }
     end
   end

@@ -1,10 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'librarian-puppet'
-gem 'puppet'
-
-group :development do
-  gem 'guard'
-  gem 'guard-shell'
-end
-
+# Specify your gem's dependencies in freighthop.gemspec
+gemspec

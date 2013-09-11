@@ -1,10 +1,11 @@
 require 'pathname'
+require_relative 'freighthop/version'
 
 unless defined? Vagrant
   raise "i expect to be required from a Vagrantfile"
 end
 
-module VagrantOnRails
+module Freighthop
   class << self
     def vmware?
       !!(defined? HashiCorp)
