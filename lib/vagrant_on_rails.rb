@@ -33,7 +33,7 @@ module VagrantOnRails
     end
 
     def ip_address
-      "10.20.1.3"
+      "10.20.1.#{app_name.getbyte(0)}"
     end
 
     def box_url
