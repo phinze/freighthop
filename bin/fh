@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+if ([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${SCRIPT_PATH}` > /dev/null
+SCRIPT_PATH=`pwd`;
+popd  > /dev/null
+
+export VAGRANT_CWD=$SCRIPT_PATH
+PROJ_NAME=$(basename $PWD)
+PROJ_ROOT="/srv/${PROJ_NAME}"
+
+if [[ $1 == 'run' ]]; then
+  shift
+  vagrant ssh -c "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; $*'"
+elif [[ $1 == 'console' ]]; then
+  shift
+  vagrant ssh-config > /tmp/freighthop.ssh-config
+  if [[ -f ./bin/rails ]]; then
+    CONSOLE_COMMAND="./bin/rails console"
+  elif [[ -f ./script/console ]]; then
+    CONSOLE_COMMAND="./script/console"
+  else
+    CONSOLE_COMMAND="./script/rails console"
+  fi
+  ssh -t -F /tmp/freighthop.ssh-config $PROJ_NAME "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; ${CONSOLE_COMMAND} $*'"
+elif [[ $1 == 'rake' ]]; then
+  vagrant ssh -c "sudo /bin/bash -l -c 'cd ${PROJ_ROOT}; bundle exec rake $*'"
+else
+  vagrant "$@"
+fi
