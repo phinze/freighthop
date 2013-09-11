@@ -1,0 +1,33 @@
+2013-07-30 Release 1.0.1
+- Unset Bundler's env vars when querying version.
+
+2013-07-04 Release 1.0.0
+- Remove some hackery on rbenv::version exec{}.
+- Default bundler_version to `>= 0`.
+- Ensure that bundler meets minimum version (won't handle downgrades).
+- Apply GDS module standards.
+- Clarify support for Ubuntu/Debian only.
+- Change how params are passed between `rbenv` and `rbenv::global`.
+- Replace `require` params with simpler chains.
+- First release on Forge.
+
+2013-06-17 Release 0.0.5
+- Set `RBENV_ROOT` when calling `bundle install`.
+- Support for specifying a given version of bundler.
+- Variabilise filesystem paths.
+- Extend test coverage.
+- Specify path for `rbenv(1)` binary.
+- Always manage a default for `rbenv::global`.
+- This should have really been a major release, sorry.
+
+2013-05-23 Release 0.0.4
+- Set `RBENV_ROOT` when calling `rbenv rehash`.
+
+2013-05-20 Release 0.0.3
+- Remove `$RBENV_ROOT/bin` from `$PATH` - deemed unnecessary.
+
+2013-05-17 Release 0.0.2
+- Add `$RBENV_ROOT/bin` to `$PATH`.
+
+2013-05-15 Release 0.0.1
+- Initial release

@@ -22,5 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'guard-shell'
 
-  spec.add_dependency 'librarian-puppet'
+  spec.add_development_dependency 'puppet'
+  spec.add_development_dependency 'librarian-puppet'
 end

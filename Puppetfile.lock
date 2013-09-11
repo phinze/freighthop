@@ -2,9 +2,6 @@ FORGE
   remote: http://forge.puppetlabs.com
   specs:
     gdsoperations/rbenv (1.0.1)
-    ploperations/bundler (1.0.0)
-    ploperations/unicorn (1.0.0)
-      ploperations/bundler (>= 0.0.1)
     puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/firewall (0.4.2)
@@ -34,7 +31,6 @@ DEPENDENCIES
   freighthop (>= 0)
   gdsoperations/rbenv (>= 0)
   nginx (>= 0)
-  ploperations/unicorn (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/postgresql (>= 0)
   puppetlabs/stdlib (>= 0)

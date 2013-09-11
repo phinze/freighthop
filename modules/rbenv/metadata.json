@@ -1,0 +1,41 @@
+{
+  "name": "gdsoperations-rbenv",
+  "version": "1.0.1",
+  "source": "https://github.com/gds-operations/puppet-rbenv",
+  "author": "Government Digital Service",
+  "license": "MIT",
+  "summary": "System wide rbenv",
+  "description": "UNKNOWN",
+  "project_page": "https://github.com/gds-operations/puppet-rbenv",
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "CHANGELOG": "1134e9d2a7a846a2c443163f6431b7e2",
+    "Gemfile": "bb3d259460b7cace9f0e33afbec52ddf",
+    "Gemfile.lock": "1271b20ff6ae4eed4290ce245eef9ff6",
+    "LICENSE": "f962015df9848b4e7ec398ae41224c4c",
+    "Modulefile": "d209b663e8ef0a0393110b17ae04cf1c",
+    "README.md": "ae8a49bd90503410385b425b5a82c613",
+    "Rakefile": "52eaf8a47600324da0273ded9c40cc93",
+    "manifests/alias.pp": "e387c3d70aeb2b8c8e205f516794023a",
+    "manifests/global.pp": "a0d3321a364141c2bd1a687a1cc2496a",
+    "manifests/init.pp": "829ee274f6140e92a002dcb0dc3487c5",
+    "manifests/params.pp": "a75812c9763d7bf0adcf95d95bb2137f",
+    "manifests/rehash.pp": "5a16530e83d3a8dac77df18adc686e34",
+    "manifests/version.pp": "39acdb1ff6eb825f2409e3124d9faa43",
+    "spec/classes/rbenv__global_spec.rb": "99ee226a7c9fe747489b81b43325e5af",
+    "spec/classes/rbenv_spec.rb": "01641312f27473f9283080255a4f8374",
+    "spec/defines/rbenv__alias_spec.rb": "7af67c06c87b9209d26228c02400d5d5",
+    "spec/defines/rbenv__rehash_spec.rb": "111c3fc29e6ca1552841e9ddf6abe828",
+    "spec/defines/rbenv__version_spec.rb": "9e928c809f56acda2e9118bd3e4a2392",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+    "spec/spec_helper_system.rb": "54c329ee5698ba18af80ee46932e1f43",
+    "spec/system/basic_spec.rb": "ea2dd22b8aeaf3af362f554313984360",
+    "templates/etc/profile.d/rbenv.sh.erb": "03cc4276562fa26a83aecc495c28fb87",
+    "tests/init.pp": "40136b020e6b19a7a2e9fde83ecbebd8"
+  }
+}
