@@ -21,6 +21,8 @@ Freighthop is based around this simple goal:
 
 ## Try it out
 
+This is a little involved at the moment (cuz alpha). Should simplify as the project evolves.
+
 ### Get the prerequisites
 
 * Vagrant 1.3.1
@@ -36,6 +38,13 @@ Freighthop is based around this simple goal:
 
 ```
 git clone https://github.com/phinze/freighthop
+```
+
+### Gems and puppet modules
+
+```
+bundle install
+librarian-puppet install
 ```
 
 ### Get the executable on your $PATH
