@@ -6,4 +6,6 @@ class vagrant_on_rails::params {
   $socket_dir      = "/var/run/${app_name}"
   $socket_path     = "${socket_dir}/puma.sock"
   $server_name     = $::fqdn
+  $ssl_cert_path   = "/etc/ssl/certs/${app_name}.pem"
+  $ssl_key_path    = "/etc/ssl/private/${app_name}.key"
 }

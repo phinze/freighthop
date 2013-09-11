@@ -3,11 +3,13 @@ class vagrant_on_rails::rbenv(
 ) {
   include apt
   apt::ppa { 'ppa:gds/govuk': }
+  apt::ppa { 'ppa:phinze/rbenv': }
 
   class { '::rbenv':
     global_version => $ruby_version,
     require        => Apt::Ppa['ppa:gds/govuk'],
   }
+
   rbenv::version { $ruby_version: }
 
   # The rbenv puppet module drops $RBENV_ROOT/version but the package from

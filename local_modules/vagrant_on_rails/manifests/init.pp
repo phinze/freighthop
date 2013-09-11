@@ -1,14 +1,16 @@
 class vagrant_on_rails(
   $databases,
   $database_users,
-  $packages     = ['git-core'],
-  $ruby_version = $vagrant_on_rails::params::ruby_version,
-  $app_name     = $vagrant_on_rails::params::app_name,
-  $app_root     = $vagrant_on_rails::params::app_root,
-  $web_root     = $vagrant_on_rails::params::web_root,
-  $socket_dir   = $vagrant_on_rails::params::socket_dir,
-  $socket_path  = $vagrant_on_rails::params::socket_path,
-  $server_name  = $vagrant_on_rails::params::server_name,
+  $packages        = ['git-core'],
+  $ruby_version    = $vagrant_on_rails::params::ruby_version,
+  $app_name        = $vagrant_on_rails::params::app_name,
+  $app_root        = $vagrant_on_rails::params::app_root,
+  $web_root        = $vagrant_on_rails::params::web_root,
+  $socket_dir      = $vagrant_on_rails::params::socket_dir,
+  $socket_path     = $vagrant_on_rails::params::socket_path,
+  $server_name     = $vagrant_on_rails::params::server_name,
+  $ssl_cert_path   = $vagrant_on_rails::params::ssl_cert_path,
+  $ssl_key_path    = $vagrant_on_rails::params::ssl_key_path,
 ) inherits vagrant_on_rails::params {
   file { $socket_dir:
     ensure => directory,
@@ -23,6 +25,8 @@ class vagrant_on_rails(
     upstream_socket_path => $socket_path,
     server_name          => $server_name,
     web_root             => $web_root,
+    ssl_cert_path        => $ssl_cert_path,
+    ssl_key_path         => $ssl_key_path,
   }
   class { 'vagrant_on_rails::postgres':
     databases      => $databases,
