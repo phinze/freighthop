@@ -20,6 +20,12 @@ class vagrant_on_rails::rbenv(
     require     => Rbenv::Version[$ruby_version]
   }
 
+  file { '/etc/profile.d/custom_bundler_gemfile.sh':
+    ensure  => present,
+    mode    => '0755',
+    content => template('vagrant_on_rails/profile/custom_bundler_gemfile.sh.erb'),
+  }
+
   Exec {
     path => [
       '/usr/local/bin',
