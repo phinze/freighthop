@@ -11,19 +11,11 @@ end
 ENV['VAGRANT_DOTFILE_PATH'] = FREIGHTHOP_VARGANT_DOTFILE_PATH
 ENV['VAGRANT_CWD']          = FREIGHTHOP_VARGANT_CWD
 
-project_name = File.basename(Dir.pwd)
-project_dir = "/srv/#{project_name}"
-
-def as_root(cmd)
-  "sudo /bin/bash -l -c '#{Shellwords.escape(cmd)}'"
-end
-
-def in_project_dir(cmd)
-  "cd #{project_dir}; #{cmd}"
-end
+PROJECT_NAME = File.basename(Dir.pwd)
+PROJECT_DIR  = "/srv/#{PROJECT_NAME}"
 
 def vagrant_ssh(cmd)
-  "/usr/bin/vagrant ssh -c '#{Shellwords.escape(cmd)}'"
+  %Q(/usr/bin/vagrant ssh -c 'sudo /bin/bash -l -c "cd #{PROJECT_DIR}; #{cmd}"')
 end
 
 def console_command
@@ -39,12 +31,12 @@ end
 subcommand, *rest = ARGV
 case subcommand
 when 'run' then
-  exec vagrant_ssh(as_root(in_project_root(rest.join(' '))))
+  exec vagrant_ssh(rest.join(' '))
 when 'console' then
   `vagrant ssh-config > /tmp/freighthop.ssh-config`
-  exec "ssh -t -F /tmp/freighthop.ssh-config #{project_name} 'sudo /bin/bash -l -c 'cd #{project_dir}; #{console_command} #{rest.join(' ')}'"
+  exec "ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'sudo /bin/bash -l -c 'cd #{PROJECT_DIR}; #{console_command} #{rest.join(' ')}'"
 when 'rake' then
-  exec vagrant_ssh(as_root(in_project_dir("bundle exec rake #{rest.join(' ')}")))
+  exec vagrant_ssh("bundle exec rake #{rest.join(' ')}")
 else
   exec "/usr/bin/vagrant #{ARGV.join(' ')}"
 end
