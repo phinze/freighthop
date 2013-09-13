@@ -29,34 +29,15 @@ This is a little involved at the moment (cuz alpha). Should simplify as the proj
 ### Get the prerequisites
 
 * Vagrant 1.3.1
-* VMWare Fusion (for now; will support VirtualBox soon)
 * Vagrant Plugins (install with `vagrant plugin install $pluginname`):
-  * landrush (for DNS)
-    * note you'll need to run `vagrant landrush install` to finish this installation procedure
+  * landrush (for DNS; note you'll need to run `vagrant landrush install` to finish this installation procedure)
   * vagrant-cachier (for apt caching; will eventually be optional)
-  * vagrant-vmware-fusion (for now)
 
 
-### Clone the project
-
-```
-git clone https://github.com/phinze/freighthop
-```
-
-### Gems and puppet modules
+### Install the gem
 
 ```
-bundle install
-librarian-puppet install
-```
-
-### Get the executable on your $PATH
-
-This is a hacky symlink for now; eventually we'll wrap the project up in a distributable package that will do this for you.
-
-```
-cd freighthop
-ln -s bin/fh /usr/local/bin/fh
+gem install freighthop
 ```
 
 ### Create config
