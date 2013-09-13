@@ -26,6 +26,11 @@ Vagrant.configure('2') do |config|
       v.vmx['numvcpus']    = 4
     end
 
+    node_config.vm.provider :virtualbox do |v|
+      v.customize ['modifyvm', :id, '--memory', '2048']
+      v.customize ['modifyvm', :id, '--cpus', '4']
+    end
+
     node_config.vm.synced_folder(
       Freighthop.host_rails_root,
       Freighthop.guest_rails_root,
