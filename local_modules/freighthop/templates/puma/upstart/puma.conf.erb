@@ -42,7 +42,7 @@ exec /bin/bash <<'EOT'
 
   source /etc/profile.d/rbenv.sh
 
-  export BUNDLE_GEMFILE=Gemfile.freighthop
+  source /etc/profile.d/custom_bundler_gemfile.sh
 
   logger -t puma "Starting server: $app"
 
