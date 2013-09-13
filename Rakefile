@@ -5,3 +5,5 @@ task :librarian do
   sh "librarian-puppet clean --verbose"
   sh "librarian-puppet install --strip-dot-git --verbose"
 end
+
+Rake::Task['build'].enhance ['librarian']

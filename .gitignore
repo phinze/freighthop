@@ -4,3 +4,4 @@
 puppet-omnibus.deb
 Gemfile.lock
 pkg/
+modules/
