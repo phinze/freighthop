@@ -29,9 +29,9 @@ This is a little involved at the moment (cuz alpha). Should simplify as the proj
 ### Get the prerequisites
 
 * Vagrant 1.3.1
-* Vagrant Plugins (install with `vagrant plugin install $pluginname`):
-  * landrush (for DNS; note you'll need to run `vagrant landrush install` to finish this installation procedure)
-  * vagrant-cachier (for apt caching; will eventually be optional)
+* And for DNS magic:
+  * `vagrant plugin install landrush`
+  * `vagrant landrush install`
 
 
 ### Install the gem
