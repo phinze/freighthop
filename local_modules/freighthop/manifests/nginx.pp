@@ -1,5 +1,5 @@
 class freighthop::nginx(
-  $upstream_socket_path,
+  $upstream_web_port,
   $server_name,
   $web_root,
   $ssl_cert_path,

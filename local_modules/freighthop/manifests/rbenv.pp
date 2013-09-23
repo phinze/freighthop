@@ -1,7 +1,6 @@
 class freighthop::rbenv(
   $ruby_version
 ) {
-  include apt
   apt::ppa { 'ppa:gds/govuk': }
   apt::ppa { 'ppa:phinze/rbenv': }
 
