@@ -31,12 +31,16 @@ end
 subcommand, *rest = ARGV
 case subcommand
 when 'run' then
-  exec vagrant_ssh(rest.join(' '))
+  `vagrant ssh-config > /tmp/freighthop.ssh-config`
+  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'cd #{PROJECT_DIR}; sudo /bin/bash -l -c "#{rest.join(' ')}"')
 when 'console' then
   `vagrant ssh-config > /tmp/freighthop.ssh-config`
-  exec "ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'sudo /bin/bash -l -c 'cd #{PROJECT_DIR}; #{console_command} #{rest.join(' ')}'"
+  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'sudo /bin/bash -l -c "cd #{PROJECT_DIR}; #{console_command} #{rest.join(' ')}"')
 when 'rake' then
   exec vagrant_ssh("bundle exec rake #{rest.join(' ')}")
+when 'ssh' then
+  `vagrant ssh-config > /tmp/freighthop.ssh-config`
+  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'cd #{PROJECT_DIR}; sudo /bin/bash -l -i')
 else
   exec "/usr/bin/vagrant #{ARGV.join(' ')}"
 end
