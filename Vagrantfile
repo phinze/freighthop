@@ -32,16 +32,20 @@ Vagrant.configure('2') do |config|
     end
 
     node_config.vm.synced_folder(
-      Freighthop.host_rails_root,
-      Freighthop.guest_rails_root,
+      Freighthop.host_root,
+      Freighthop.guest_root,
       nfs: true
     )
+
+    Freighthop.mounts.each do |host, guest|
+      node_config.vm.synced_folder(host, guest, nfs: true)
+    end
 
     node_config.vm.provision :shell, path: 'init/bootstrap_puppet_omnibus.sh'
 
     node_config.vm.provision :shell do |s|
       s.path = 'init/symlinks_for_hiera.sh'
-      s.args = Freighthop.guest_rails_root
+      s.args = Freighthop.guest_root.to_s
     end
 
     puppet_options = [].tap do |options|
