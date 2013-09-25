@@ -21,7 +21,7 @@ module Freighthop
     end
 
     def app_name
-      @app_name ||= host_rails_root.basename.to_s
+      @app_name ||= host_root.basename.to_s
     end
 
     def hostname
@@ -43,8 +43,8 @@ module Freighthop
     def mounts
       Freighthop::Config.fetch("freighthop::mounts").map do |host, guest|
         [
-          File.expand_path(host_rails_root.join(host)),
-          File.expand_path(guest_rails_root.join(guest)),
+          File.expand_path(host_root.join(host)),
+          File.expand_path(guest_root.join(guest)),
         ]
       end
     end

@@ -1,6 +1,6 @@
 class Freighthop::Config
   def self.file
-    Freighthop.root.join('.freighthop.json')
+    Freighthop.host_root.join('.freighthop.json')
   end
 
   def self.config
