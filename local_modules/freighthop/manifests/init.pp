@@ -1,7 +1,8 @@
 class freighthop(
   $databases,
   $database_users,
-  $packages        = ['git-core'],
+  $packages        = $freighthop::params::packages,
+  $ppas            = $freighthop::params::ppas,
   $ruby_version    = $freighthop::params::ruby_version,
   $app_name        = $freighthop::params::app_name,
   $app_root        = $freighthop::params::app_root,
@@ -13,6 +14,9 @@ class freighthop(
 ) inherits freighthop::params {
   include apt
 
+  class { 'freighthop::ppas':
+    ppas => $ppas,
+  } ->
   class { 'freighthop::pkgs':
     packages => $packages,
   } ->
