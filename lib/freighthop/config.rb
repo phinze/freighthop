@@ -7,7 +7,7 @@ class Freighthop::Config
     @config = JSON.parse(file.read)
   end
 
-  def self.fetch(key)
-    config[key]
+  def self.fetch(*args)
+    config.fetch(*args)
   end
 end

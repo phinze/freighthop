@@ -1,6 +1,6 @@
-class freighthop::postgres(
+class freighthop::database::postgres(
   $databases,
-  $database_users
+  $database_users,
 ) {
   include postgresql::server
 

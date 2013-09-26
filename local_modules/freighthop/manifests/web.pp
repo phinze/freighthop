@@ -1,11 +1,11 @@
-class freighthop::nginx(
+class freighthop::web(
   $upstream_web_port,
   $server_name,
   $web_root,
   $ssl_cert_path,
   $ssl_key_path,
 ) {
-  $cert_subject = "/C=US/ST=IL/L=Chicago/O=Instructure/CN=${server_name}"
+  $cert_subject = "/C=US/ST=IL/L=Chicago/O=Freighthop/CN=${server_name}"
 
   class {'::nginx':
     confd_purge => true

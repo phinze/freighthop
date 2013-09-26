@@ -41,7 +41,7 @@ module Freighthop
     end
 
     def mounts
-      Freighthop::Config.fetch("freighthop::mounts").map do |host, guest|
+      Freighthop::Config.fetch('freighthop::mounts', []).map do |host, guest|
         [
           File.expand_path(host_root.join(host)),
           File.expand_path(guest_root.join(guest)),
