@@ -1,17 +1,16 @@
-# Freighthop: Vagrant on Rails
-
+# Freighthop: Hitch a Ride on Vagrant
 
 Don't you hate how your dev machine inevitably becomes the superset of all the dependencies of every project you ever worked on? Nobody wants to live in a war zone of data stores fighting for resources.
 
-Vagrant is suppose to help us with this. Package everything in virtual machines, and your life will be amazing! That's the idea at least; but the actual mechanics of getting to that promised land are not all that clear.
+Vagrant is supposed to help us with this. Package everything in virtual machines, and your life will be amazing! That's the idea at least; but the actual mechanics of getting to that promised land are not all that clear.
 
 ## What is Freighthop?
 
 Freighthop is based around this simple goal:
 
-> When I download a rails project, I want to run a single command that spins me up a VM serving that project.
+> When I download a project, I want to run a single command that spins me up a VM serving said project.
 
-With a few commands from the project root of any Rack-compatible app, Freighthop can spin up a VM that serves that project at `projectname.vagrant.dev`. Freighthop takes care of the bundle install, the server configuration, and the database, and it provides a helper executable that allows you to interact with the VM.
+With a few commands from the project root of any `{Ruby,Clojure}` web app, Freighthop can spin up a VM that serves that project at `projectname.vagrant.dev`. Freighthop takes care of package install, the server configuration, and the database, and it provides`fh`, a friendly helper executable that allows you to interact with the VM.
 
 ----
 
@@ -23,8 +22,6 @@ With a few commands from the project root of any Rack-compatible app, Freighthop
 
 
 ## Try it out
-
-This is a little involved at the moment (cuz alpha). Should simplify as the project evolves.
 
 ### Get the prerequisites
 
@@ -46,16 +43,10 @@ A Freighthop-enabled project just needs to include a `.freighthop.json` somethin
 
 ```json
 {
+  "freighthop::languages": ["ruby"],
   "freighthop::ruby_version": "2.0.0-p247",
-  "freighthop::databases": [
-    "myproject_development",
-    "myproject_test"
-  ],
-  "freighthop::database_users": [
-    "myproject"
-  ],
+  "freighthop::web_port": 9292,  
   "freighthop::packages": [
-    "git-core",
     "libpq-dev",
     "libsqlite3-dev",
     "libxml2-dev",
@@ -72,6 +63,8 @@ A Freighthop-enabled project just needs to include a `.freighthop.json` somethin
 fh up
 # run your migrations
 fh rake db:migrate
+# spin up your server
+fh run rackup
 ```
 
 ### Win
@@ -85,7 +78,7 @@ curl http://myproject.vagrant.dev
 ### Shut 'er down
 
 ```
-fh down
+fh halt
 ```
 
 And your host system is none the wiser! No databases lying around, no daemons hanging out forever in the background; squeaky clean!
