@@ -2,9 +2,9 @@ class freighthop::params {
   $database_flavors = []
   $databases        = []
   $database_users   = []
-  $packages         = ['git-core']
+  $packages         = []
   $ppas             = []
-  $languages        = ['ruby']
+  $languages        = []
   $ruby_version     = '1.9.3-p392'
   $app_name         = $::hostname
   $app_root         = "/srv/${app_name}"
