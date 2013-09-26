@@ -1,6 +1,8 @@
 class freighthop::language::clojure(
 ){
   $lein_url = 'https://github.com/technomancy/leiningen/raw/stable/bin/lein'
+  $lein_home = '/usr/local/lein'
+
   package { 'leiningen/java':
     name => 'openjdk-6-jdk'
   } ->
@@ -15,17 +17,8 @@ class freighthop::language::clojure(
     creates => '/usr/local/bin/lein',
   } ->
 
-  exec { 'leiningen/self-install':
-    environment => [
-      'LEIN_HOME=/usr/local/var/lein',
-      'LEIN_ROOT=1',
-    ],
-    command     => 'lein self-install',
-    creates     => '/usr/local/var/lein',
-  } ->
-
-  file { '/etc/profile.d/global_leiningen.sh':
-    content => template('freighthop/profile/global_leiningen.sh.erb'),
+  file { '/etc/profile.d/leiningen.sh':
+    content => template('freighthop/profile/leiningen.sh.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0755',

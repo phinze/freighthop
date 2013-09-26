@@ -16,8 +16,9 @@ class freighthop(
 ) inherits freighthop::params {
 
   class { 'freighthop::packages':
-    ppas     => $ppas,
-    packages => $packages,
+    ppas      => $ppas,
+    packages  => $packages,
+    languages => $languages,
   } ->
 
   class { 'freighthop::language':
