@@ -14,14 +14,17 @@ class freighthop(
   $ssl_cert_path    = $freighthop::params::ssl_cert_path,
   $ssl_key_path     = $freighthop::params::ssl_key_path,
 ) inherits freighthop::params {
+
   class { 'freighthop::packages':
     ppas     => $ppas,
     packages => $packages,
   } ->
+
   class { 'freighthop::language':
     languages    => $languages,
     ruby_version => $ruby_version
   } ->
+
   class { 'freighthop::web':
     upstream_web_port => $web_port,
     server_name       => $server_name,
@@ -29,6 +32,7 @@ class freighthop(
     ssl_cert_path     => $ssl_cert_path,
     ssl_key_path      => $ssl_key_path,
   } ->
+
   class { 'freighthop::database':
     database_flavors => $database_flavors,
     databases        => $databases,

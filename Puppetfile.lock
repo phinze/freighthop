@@ -33,5 +33,5 @@ DEPENDENCIES
   nginx (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/postgresql (>= 0)
-  puppetlabs/stdlib (>= 0)
+  puppetlabs/stdlib (= 4.1.0)
 

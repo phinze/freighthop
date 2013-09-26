@@ -26,5 +26,4 @@ class freighthop::language::ruby(
       '/sbin',
     ]
   }
-
 }

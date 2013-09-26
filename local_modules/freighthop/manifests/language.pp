@@ -7,4 +7,8 @@ class freighthop::language(
       version => $ruby_version,
     }
   }
+  if (member($languages, 'clojure')) {
+    class { 'freighthop::language::clojure':
+    }
+  }
 }
