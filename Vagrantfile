@@ -22,13 +22,13 @@ Vagrant.configure('2') do |config|
 
     node_config.vm.provider :vmware_fusion do |v|
       v.vmx['displayName'] = Freighthop.hostname
-      v.vmx['memsize']     = 2048
-      v.vmx['numvcpus']    = 4
+      v.vmx['memsize']     = Freighthop.ram
+      v.vmx['numvcpus']    = Freighthop.cpus
     end
 
     node_config.vm.provider :virtualbox do |v|
-      v.customize ['modifyvm', :id, '--memory', '2048']
-      v.customize ['modifyvm', :id, '--cpus', '4']
+      v.customize ['modifyvm', :id, '--memory', Freighthop.ram]
+      v.customize ['modifyvm', :id, '--cpus', Freighthop.cpus]
     end
 
     node_config.vm.synced_folder(

@@ -48,6 +48,14 @@ module Freighthop
         ]
       end
     end
+
+    def cpus
+      Freighthop::Config.fetch('freighthop::cpus', 2)
+    end
+
+    def ram
+      Freighthop::Config.fetch('freighthop::ram', 1024)
+    end
   end
 end
 
