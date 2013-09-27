@@ -1,46 +1,80 @@
 #!/usr/bin/env ruby
 
-FREIGHTHOP_VARGANT_DOTFILE_PATH = File.expand_path('~/.freighthop.d/vagrant')
-FREIGHTHOP_VARGANT_CWD          = File.expand_path(File.dirname(__FILE__))
+FREIGHTHOP_VAGRANT_DOTFILE_PATH = File.expand_path('~/.freighthop.d/vagrant')
+FREIGHTHOP_VAGRANT_CWD          = File.expand_path(File.dirname(__FILE__))
 
-unless File.directory?(FREIGHTHOP_VARGANT_DOTFILE_PATH)
+unless File.directory?(FREIGHTHOP_VAGRANT_DOTFILE_PATH)
   require 'fileutils'
-  FileUtils.mkdir_p(FREIGHTHOP_VARGANT_DOTFILE_PATH)
+  FileUtils.mkdir_p(FREIGHTHOP_VAGRANT_DOTFILE_PATH)
 end
 
-ENV['VAGRANT_DOTFILE_PATH'] = FREIGHTHOP_VARGANT_DOTFILE_PATH
-ENV['VAGRANT_CWD']          = FREIGHTHOP_VARGANT_CWD
+ENV['VAGRANT_DOTFILE_PATH'] = FREIGHTHOP_VAGRANT_DOTFILE_PATH
+ENV['VAGRANT_CWD']          = FREIGHTHOP_VAGRANT_CWD
 
 PROJECT_NAME = File.basename(Dir.pwd)
 PROJECT_DIR  = "/srv/#{PROJECT_NAME}"
 
-def vagrant_ssh(cmd)
-  %Q(/usr/bin/vagrant ssh -c 'sudo /bin/bash -l -c "cd #{PROJECT_DIR}; #{cmd}"')
-end
+def print_usage
+  puts <<USAGETEXT
+NAME
+  fh - freighthop's friendly helper
 
-def console_command
-  if File.exist?('./bin/rails')
-    './bin/rails console'
-  elsif File.exist?('./script/console')
-    './script/console'
-  else
-    './script/rails console'
-  end
+DESCRIPTION
+  The fh command is used to interact with a freighthop-managed vm from the root
+  of your project directory.
+
+SYNOPSIS
+  fh <COMMAND> [args...]
+
+COMMANDS
+  up        - boot freighthop vm
+  halt      - shutdown freighthop vm
+  destroy   - shutdown and delete vm
+  provision - rerun provisioning on a booted freighthop vm
+  reload    - restart freighthop vm (picks up new config changes)
+  status    - check the current status of the freighthop vm
+  ssh       - opens a root shell inside the project dir of the freighthop vm
+  (other)   - see below
+  help      - this help
+
+PASSTHROUGH TO VM
+  Anything that does not match the above list will be passed through to the
+  freighthop vm.
+
+  The command will be run in a bash shell, as root, from inside the shared
+  project directory.
+
+  This allows you to specify relative commands like ./script/server and expect
+  them to behave properly.
+
+EXAMPLES
+  Install gem dependencies:
+    fh bundle install
+
+  Start a Rails 4 server:
+    fh ./bin/rails server
+
+  Run a ruby test:
+    fh ruby -Itest test/unit/object_test.rb
+
+  Install leiningen dependencies:
+    fh lein deps
+
+  Run a ring server:
+    fh lein ring server-headless
+USAGETEXT
 end
 
 subcommand, *rest = ARGV
 case subcommand
-when 'run' then
-  `vagrant ssh-config > /tmp/freighthop.ssh-config`
-  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'cd #{PROJECT_DIR}; sudo /bin/bash -l -c "#{rest.join(' ')}"')
-when 'console' then
-  `vagrant ssh-config > /tmp/freighthop.ssh-config`
-  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'sudo /bin/bash -l -c "cd #{PROJECT_DIR}; #{console_command} #{rest.join(' ')}"')
-when 'rake' then
-  exec vagrant_ssh("bundle exec rake #{rest.join(' ')}")
+when 'help' then
+  print_usage
+when 'up', 'halt', 'destroy', 'provision', 'reload', 'status' then
+  exec %Q(vagrant #{subcommand} #{rest.join(' ')})
 when 'ssh' then
   `vagrant ssh-config > /tmp/freighthop.ssh-config`
   exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'cd #{PROJECT_DIR}; sudo /bin/bash -l -i')
 else
-  exec "/usr/bin/vagrant #{ARGV.join(' ')}"
+  `vagrant ssh-config > /tmp/freighthop.ssh-config`
+  exec %Q(ssh -t -F /tmp/freighthop.ssh-config #{PROJECT_NAME} 'cd #{PROJECT_DIR}; sudo /bin/bash -l -c "#{rest.unshift(subcommand).join(' ')}"')
 end
