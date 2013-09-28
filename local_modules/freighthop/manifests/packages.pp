@@ -18,5 +18,6 @@ class freighthop::packages(
 
   package { $packages:
     ensure  => installed,
+    require => Apt::Ppa[$ppas]
   }
 }
