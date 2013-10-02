@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'freighthop'
-Freighthop::CLI.new(*ARGV).run!
+Freighthop::CLI.new(*ARGV).run

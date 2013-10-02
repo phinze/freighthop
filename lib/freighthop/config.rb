@@ -1,4 +1,8 @@
 class Freighthop::Config
+  def self.exist?
+    file.exist?
+  end
+
   def self.file
     Freighthop.host_root.join('.freighthop.json')
   end
