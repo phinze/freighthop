@@ -1,10 +1,9 @@
 require 'pathname'
+
 require_relative 'freighthop/version'
 require_relative 'freighthop/config'
-
-unless defined? Vagrant
-  raise "i expect to be required from a Vagrantfile"
-end
+require_relative 'freighthop/cli'
+require_relative 'freighthop/vagrant_env'
 
 module Freighthop
   class << self
@@ -18,6 +17,10 @@ module Freighthop
 
     def guest_root
       Pathname("/srv/#{app_name}")
+    end
+
+    def freighthop_root
+      Pathname(File.dirname(__FILE__)).join('..').expand_path
     end
 
     def app_name
