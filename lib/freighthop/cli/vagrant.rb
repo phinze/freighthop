@@ -17,7 +17,7 @@ class Freighthop::CLI::Vagrant
   end
 
   def args
-    (@rest || []).join(' ')
+    ([*@rest] || []).join(' ')
   end
 
   def run

@@ -7,7 +7,7 @@ Vagrant.require_plugin 'landrush'
 
 Vagrant.configure('2') do |config|
   config.vm.box = 'precise64'
-  config.vm.box_url = Freighthop.box_url 
+  config.vm.box_url = Freighthop.box_url
 
   config.landrush.enable
 
