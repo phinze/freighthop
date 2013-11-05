@@ -5,6 +5,8 @@ FORGE
     puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/firewall (0.4.2)
+    puppetlabs/mysql (2.0.1)
+      puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/postgresql (2.5.0)
       puppetlabs/apt (< 2.0.0, >= 1.1.0)
       puppetlabs/firewall (>= 0.0.4)
@@ -32,6 +34,7 @@ DEPENDENCIES
   gdsoperations/rbenv (>= 0)
   nginx (>= 0)
   puppetlabs/apt (>= 0)
+  puppetlabs/mysql (>= 0)
   puppetlabs/postgresql (>= 0)
   puppetlabs/stdlib (= 4.1.0)
 

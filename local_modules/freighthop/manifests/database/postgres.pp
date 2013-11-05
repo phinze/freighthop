@@ -1,17 +1,17 @@
 class freighthop::database::postgres(
-  $databases,
-  $database_users,
+  $db_names,
+  $users,
 ) {
   include postgresql::server
 
-  postgresql::pg_hba_rule { 'local-users-get-everything':
+  postgresql::server::pg_hba_rule { 'local-users-get-everything':
     type        => 'local',
     database    => 'all',
     user        => 'all',
     auth_method => 'trust',
     order       => '0001',
   }
-  postgresql::pg_hba_rule { 'local-host-connections-get-everything':
+  postgresql::server::pg_hba_rule { 'local-host-connections-get-everything':
     type        => 'host',
     database    => 'all',
     user        => 'all',
@@ -19,8 +19,8 @@ class freighthop::database::postgres(
     auth_method => 'trust',
     order       => '0001',
   }
-  postgresql::database { $databases: }
-  postgresql::database_user { $database_users:
+  postgresql::server::database { $db_names: }
+  postgresql::server::role { $users:
     superuser     => true,
     createdb      => true,
     createrole    => true,
