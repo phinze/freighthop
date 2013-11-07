@@ -1,7 +1,4 @@
 class freighthop::params {
-  $database_flavors = []
-  $databases        = []
-  $database_users   = []
   $packages         = []
   $ppas             = []
   $languages        = []

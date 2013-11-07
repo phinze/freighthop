@@ -2,9 +2,6 @@ class freighthop(
   $ppas             = $freighthop::params::ppas,
   $packages         = $freighthop::params::packages,
   $languages        = $freighthop::params::languages,
-  $database_flavors = $freighthop::params::database_flavors,
-  $databases        = $freighthop::params::databases,
-  $database_users   = $freighthop::params::database_users,
   $ruby_version     = $freighthop::params::ruby_version,
   $app_name         = $freighthop::params::app_name,
   $app_root         = $freighthop::params::app_root,
@@ -34,9 +31,5 @@ class freighthop(
     ssl_key_path      => $ssl_key_path,
   } ->
 
-  class { 'freighthop::database':
-    database_flavors => $database_flavors,
-    databases        => $databases,
-    database_users   => $database_users,
-  }
+  class { 'freighthop::database':}
 }
