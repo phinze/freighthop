@@ -24,7 +24,7 @@ module Freighthop
     end
 
     def app_name
-      @app_name ||= host_root.basename.to_s
+      @app_name ||= host_root.basename.to_s.gsub(/[_ ]/, '-')
     end
 
     def hostname
