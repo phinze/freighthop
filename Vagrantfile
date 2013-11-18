@@ -4,6 +4,7 @@
 require_relative 'lib/freighthop'
 
 Vagrant.require_plugin 'landrush'
+Vagrant.require_plugin 'vagrant-cachier'
 
 Vagrant.configure('2') do |config|
   config.vm.box = 'precise64'
@@ -11,10 +12,8 @@ Vagrant.configure('2') do |config|
 
   config.landrush.enable
 
-  if config.respond_to? :cache
-    config.cache.auto_detect = true
-    config.cache.enable_nfs = true
-  end
+  config.cache.auto_detect = true
+  config.cache.enable_nfs = true
 
   config.vm.define Freighthop.app_name do |node_config|
     node_config.vm.hostname = Freighthop.hostname
