@@ -1,5 +1,5 @@
 class freighthop::database(
-  $flavors
+  $flavors = []
 ) {
   if (member($flavors, 'postgres')) {
     class { 'freighthop::database::postgres':}
