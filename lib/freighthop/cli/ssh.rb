@@ -20,7 +20,7 @@ class Freighthop::CLI::SSH
   end
 
   def ssh(cmd)
-    exec %Q(ssh -t -F #{config} #{app_name} 'cd #{guest_root}; sudo /bin/bash -l #{cmd}')
+    exec %Q(ssh -t -F #{config} #{app_name} 'cd #{guest_root}; /bin/bash -l #{cmd}')
   end
 
   def config
