@@ -31,10 +31,6 @@ module Freighthop
       "#{app_name}.vagrant.dev"
     end
 
-    def ip_address
-      "10.20.1.#{app_name.getbyte(0)}"
-    end
-
     def box_url
       if vmware?
         'http://files.vagrantup.com/precise64_vmware.box'

@@ -17,7 +17,6 @@ Vagrant.configure('2') do |config|
 
   config.vm.define Freighthop.app_name do |node_config|
     node_config.vm.hostname = Freighthop.hostname
-    node_config.vm.network :private_network, ip: Freighthop.ip_address
 
     node_config.vm.provider :vmware_fusion do |v|
       v.vmx['displayName'] = Freighthop.hostname
