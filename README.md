@@ -26,6 +26,8 @@ With a few commands from the project root of any `{Ruby,Clojure}` web app, Freig
 ### Get the prerequisites
 
 * Vagrant 1.3.1
+* A little speed boost:
+  * `vagrant plugin install vagrant-cachier`
 * And for DNS magic:
   * `vagrant plugin install landrush`
   * `vagrant landrush install`
