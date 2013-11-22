@@ -31,6 +31,12 @@ module Freighthop
       "#{app_name}.vagrant.dev"
     end
 
+    # For now only use NFS on vmware to work around this issue:
+    # https://github.com/phinze/landrush/issues/17
+    def nfs?
+      vmware?
+    end
+
     def box_url
       if vmware?
         'http://files.vagrantup.com/precise64_vmware.box'

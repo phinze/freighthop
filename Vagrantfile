@@ -13,7 +13,7 @@ Vagrant.configure('2') do |config|
   config.landrush.enable
 
   config.cache.auto_detect = true
-  config.cache.enable_nfs = true
+  config.cache.enable_nfs = Freighthop.nfs?
 
   config.vm.define Freighthop.app_name do |node_config|
     node_config.vm.hostname = Freighthop.hostname
@@ -32,11 +32,11 @@ Vagrant.configure('2') do |config|
     node_config.vm.synced_folder(
       Freighthop.host_root,
       Freighthop.guest_root,
-      nfs: true
+      nfs: Freighthop.nfs?
     )
 
     Freighthop.mounts.each do |host, guest|
-      node_config.vm.synced_folder(host, guest, nfs: true)
+      node_config.vm.synced_folder(host, guest, nfs: Freighthop.nfs?)
     end
 
     node_config.vm.provision :shell, path: 'init/bootstrap_puppet_omnibus.sh'
