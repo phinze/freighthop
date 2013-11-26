@@ -1,7 +1,7 @@
 FORGE
   remote: http://forge.puppetlabs.com
   specs:
-    gdsoperations/rbenv (1.0.1)
+    alup/rbenv (1.2.0)
     puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/firewall (0.4.2)
@@ -30,8 +30,8 @@ PATH
     freighthop (0.0.1)
 
 DEPENDENCIES
+  alup/rbenv (>= 0)
   freighthop (>= 0)
-  gdsoperations/rbenv (>= 0)
   nginx (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/mysql (>= 0)

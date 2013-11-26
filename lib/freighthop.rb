@@ -34,7 +34,11 @@ module Freighthop
     # For now only use NFS on vmware to work around this issue:
     # https://github.com/phinze/landrush/issues/17
     def nfs?
-      vmware?
+      if ENV.key? 'FREIGHTHOP_NFS'
+        ['1','true','on'].include?(ENV['FREIGHTHOP_NFS'])
+      else
+        vmware?
+      end
     end
 
     def box_url

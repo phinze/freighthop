@@ -3,15 +3,11 @@ class freighthop::packages(
   $packages,
   $languages,
 ) {
-  if (member($languages, 'ruby')) {
-    apt::ppa { 'ppa:gds/govuk': }
-    apt::ppa { 'ppa:phinze/rbenv': }
-  }
   apt::ppa { $ppas: }
 
   package { [
     'build-essential',
-    'git-core',
+    'git',
   ]:
     ensure => installed,
   }
