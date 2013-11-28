@@ -1,4 +1,4 @@
-class Freighthop::CLI::Vagrant
+class Freighthop::CLI::Vagrant < Freighthop::CLI::Base
   COMMANDS = %w[
     up
     halt
@@ -8,19 +8,14 @@ class Freighthop::CLI::Vagrant
     status
   ]
 
-  def self.match?(*args)
+  def self.match?(args)
     COMMANDS.include?(args.first)
   end
 
-  def initialize(*args)
-    @subcommand, @rest = args
-  end
+  def run(args)
+    subcommand, rest = args
+    rest = Array(rest).join(' ')
 
-  def args
-    ([*@rest] || []).join(' ')
-  end
-
-  def run
-    exec %Q(vagrant #{@subcommand} #{args})
+    exec %Q(vagrant #{subcommand} #{rest})
   end
 end

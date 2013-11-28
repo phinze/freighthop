@@ -1,16 +1,14 @@
-class Freighthop::CLI::Help
+class Freighthop::CLI::Help < Freighthop::CLI::Base
   TOPICS = []
 
-  def self.match?(*args)
+  def self.match?(args)
     args.first == 'help' || args.empty?
   end
 
-  def initialize(*args)
-    _, @topic, *_ = args
-  end
-
-  def run
-    if TOPICS.include?(@topic)
+  def run(args)
+    _, topic, *_ = args
+    if TOPICS.include?(topic)
+      # NYI
     else
       usage
     end

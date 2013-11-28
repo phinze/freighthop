@@ -1,22 +1,14 @@
-class Freighthop::CLI::SSH
+class Freighthop::CLI::SSH < Freighthop::CLI::Base
   def self.match?(*args)
     !args.empty? # we handle guest passthrough
   end
 
-  def initialize(*args)
-    @args = args
-  end
-
-  def run
-    if shell?
+  def run(args)
+    if args.first == 'ssh'
       ssh('-i')
     else
-      ssh(%Q(-c "#{@args.join(' ')}"))
+      ssh(%Q(-c "#{args.join(' ')}"))
     end
-  end
-
-  def shell?
-    @args.first == 'ssh'
   end
 
   def ssh(cmd)
@@ -25,7 +17,7 @@ class Freighthop::CLI::SSH
 
   def config
     config_path.tap do |conf|
-      if !conf.exist? || (Time.now - conf.mtime) > 86400
+      if !conf.exist? || (Time.now - conf.mtime) > 3600
         `vagrant ssh-config > #{conf}`
       end
     end
@@ -36,11 +28,11 @@ class Freighthop::CLI::SSH
   end
 
   def app_name
-    Freighthop.app_name
+    freighthop.app_name
   end
 
   def guest_root
-    Freighthop.guest_root
+    freighthop.guest_root
   end
 end
 

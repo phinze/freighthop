@@ -1,17 +1,23 @@
 class Freighthop::Config
-  def self.exist?
+
+  attr_reader :freighthop
+  def initialize(freighthop)
+    @freighthop = freighthop
+  end
+
+  def exist?
     file.exist?
   end
 
-  def self.file
-    Freighthop.host_root.join('.freighthop.json')
+  def file
+    freighthop.host_root.join('.freighthop.json')
   end
 
-  def self.config
+  def config
     @config = JSON.parse(file.read)
   end
 
-  def self.fetch(*args)
+  def fetch(*args)
     config.fetch(*args)
   end
 end
