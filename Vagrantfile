@@ -15,6 +15,8 @@ Vagrant.configure('2') do |config|
   config.cache.auto_detect = true
   config.cache.enable_nfs = Freighthop.nfs?
 
+  config.ssh.forward_agent = true
+
   config.vm.define Freighthop.app_name do |node_config|
     node_config.vm.hostname = Freighthop.hostname
 
