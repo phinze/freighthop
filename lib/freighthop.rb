@@ -1,4 +1,5 @@
 require 'pathname'
+require 'json'
 
 require_relative 'freighthop/version'
 require_relative 'freighthop/config'

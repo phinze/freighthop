@@ -29,6 +29,7 @@ SYNOPSIS
   fh <COMMAND> [args...]
 
 BUILT-IN COMMANDS
+  init      - create a template freighthop config in the current dir
   up        - boot freighthop vm
   halt      - shutdown freighthop vm
   destroy   - shutdown and delete vm
@@ -50,6 +51,12 @@ PASSTHROUGH TO VM
   them to behave properly.
 
 EXAMPLES
+  Get started with a fresh config:
+    fh init
+
+  Boot your Freighthop-managed VM:
+    fh up
+
   Install gem dependencies:
     fh bundle install
 

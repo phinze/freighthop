@@ -8,6 +8,7 @@ class Freighthop::CLI::SSH
   end
 
   def run
+    Freighthop::CLI::Checks.ensure_config_exists!
     if shell?
       ssh('-i')
     else

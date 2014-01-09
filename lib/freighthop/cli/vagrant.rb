@@ -21,6 +21,7 @@ class Freighthop::CLI::Vagrant
   end
 
   def run
+    Freighthop::CLI::Checks.ensure_config_exists!
     exec %Q(vagrant #{@subcommand} #{args})
   end
 end
