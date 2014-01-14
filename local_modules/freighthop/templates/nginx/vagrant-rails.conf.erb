@@ -1,9 +1,9 @@
 upstream app_server {
-  server localhost:<%= upstream_web_port %> fail_timeout=0;
+  server localhost:<%= upstream_port %> fail_timeout=0;
 }
 
 server {
-  listen 80 default deferred; # for Linux
+  listen <%= port %> default deferred; # for Linux
 
   client_max_body_size 4G;
   server_name <%= server_name %>;
@@ -42,8 +42,9 @@ server {
   }
 }
 
+<% if ssl -%>
 server {
-  listen 443;
+listen <%= ssl_port %>;
   client_max_body_size 4G;
   server_name <%= server_name %>;
 
@@ -84,3 +85,4 @@ server {
     root <%= web_root %>;
   }
 }
+<% end -%>

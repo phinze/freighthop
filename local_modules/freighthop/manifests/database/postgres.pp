@@ -1,5 +1,5 @@
 class freighthop::database::postgres(
-  $db_names,
+  $databases,
   $users,
 ) {
   include postgresql::server
@@ -19,7 +19,7 @@ class freighthop::database::postgres(
     auth_method => 'trust',
     order       => '0001',
   }
-  postgresql::server::database { $db_names: }
+  postgresql::server::database { $databases: }
   postgresql::server::role { $users:
     superuser     => true,
     createdb      => true,

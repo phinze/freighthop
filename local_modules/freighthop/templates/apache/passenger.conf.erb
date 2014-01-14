@@ -1,0 +1,18 @@
+# Managed by Puppet; changes will be overwritten.
+<IfModule mod_passenger.c>
+  # PassengerRoot comes straight from the phusion libapache2-mod-passenger
+  # package's stock config
+  PassengerRoot /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini
+
+  # Points to the ruby interpreter that will be used to run applications
+  PassengerDefaultRuby /home/vagrant/.rbenv/shims/ruby
+
+  # Send uploads directly to Rack application without buffering them first.
+  # Allows application to deal in streams for large uploads.
+  # Requires Passenger 4.0.26 or higher; defaults to Off
+<% if @passenger_buffer_upload -%>
+  PassengerBufferUpload On
+<% else -%>
+  PassengerBufferUpload Off
+<% end -%>
+</IfModule>

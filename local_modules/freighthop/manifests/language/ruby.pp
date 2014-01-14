@@ -1,5 +1,5 @@
 class freighthop::language::ruby(
-  $version
+  $version = $freighthop::params::ruby_version
 ){
   rbenv::install { 'vagrant': }
   rbenv::compile { $version:

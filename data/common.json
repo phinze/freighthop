@@ -1,5 +1,7 @@
 {
-  "classes": [
-    "freighthop"
+  "classes": ["freighthop"],
+  "freighthop::packages": [
+    "build-essential",
+    "git"
   ]
 }

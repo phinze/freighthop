@@ -1,20 +1,10 @@
 class freighthop::database::mysql(
-  $db_names,
+  $databases,
   $users,
 ) {
   include mysql::server
+  include mysql::client
 
-  mysql::db{$db_names:
-    user => "notorious",
-    password => "notorious",
-    host => "localhost",
-    grant => ['All']
-  }
-  mysql_grant { $users:
-    ensure     => 'present',
-    options    => ['GRANT'],
-    privileges => ['ALL'],
-    table      => '*.*',
-    user       => 'notorious@%',
-  }
+  mysql_database { $databases: } ->
+  freighthop::database::mysql::grant { $users: }
 }

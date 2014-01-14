@@ -1,10 +1,10 @@
 class freighthop::database(
-  $flavors = []
+  $servers = []
 ) {
-  if (member($flavors, 'postgres')) {
+  if member($servers, 'postgres') {
     class { 'freighthop::database::postgres':}
   }
-  if (member($flavors, 'mysql')) {
+  if member($servers, 'mysql') {
     class { 'freighthop::database::mysql':}
   }
 }

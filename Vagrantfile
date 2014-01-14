@@ -59,7 +59,9 @@ Vagrant.configure('2') do |config|
       puppet.module_path = 'modules'
       puppet.manifest_file = 'site.pp'
       puppet.facter = {
-        'app_name' => Freighthop.app_name
+        'app_name'       => Freighthop.app_name,
+        'freighthop_uid' => Process.uid,
+        'freighthop_gid' => Process.gid,
       }
     end
   end

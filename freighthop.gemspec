@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-shell'
 
   spec.add_development_dependency 'puppet'
-  spec.add_development_dependency 'librarian-puppet'
+  spec.add_development_dependency 'librarian-puppet', '~> 0.9.10'
   spec.add_development_dependency 'json'
 end

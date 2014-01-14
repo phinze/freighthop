@@ -1,16 +1,10 @@
 class freighthop::packages(
   $ppas,
   $packages,
-  $languages,
 ) {
-  apt::ppa { $ppas: }
+  include apt
 
-  package { [
-    'build-essential',
-    'git',
-  ]:
-    ensure => installed,
-  }
+  apt::ppa { $ppas: }
 
   package { $packages:
     ensure  => installed,

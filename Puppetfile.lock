@@ -4,6 +4,8 @@ FORGE
     alup/rbenv (1.2.0)
     puppetlabs/apt (1.2.0)
       puppetlabs/stdlib (>= 2.2.1)
+    puppetlabs/concat (1.1.0-rc1)
+      puppetlabs/stdlib (>= 3.0.0)
     puppetlabs/firewall (0.4.2)
     puppetlabs/mysql (2.0.1)
       puppetlabs/stdlib (>= 2.2.1)
@@ -24,6 +26,15 @@ GIT
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
 
+GIT
+  remote: https://github.com/puppetlabs/puppetlabs-apache
+  ref: master
+  sha: 739f2a69fe43413349f90f1ba7b95ae3bdc1b02a
+  specs:
+    apache (0.10.0)
+      puppetlabs/concat (>= 1.0.0)
+      puppetlabs/stdlib (>= 2.4.0)
+
 PATH
   remote: local_modules/freighthop
   specs:
@@ -31,6 +42,7 @@ PATH
 
 DEPENDENCIES
   alup/rbenv (>= 0)
+  apache (>= 0)
   freighthop (>= 0)
   nginx (>= 0)
   puppetlabs/apt (>= 0)
