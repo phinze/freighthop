@@ -1,7 +1,6 @@
 {
   "classes": ["freighthop"],
-  "freighthop::packages": [
-    "build-essential",
-    "git"
-  ]
+  "freighthop::ppas": [],
+  "freighthop::packages": ["build-essential", "git"],
+  "freighthop::languages": []
 }

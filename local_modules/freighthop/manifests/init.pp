@@ -1,7 +1,7 @@
 class freighthop(
-  $ppas        = $freighthop::params::ppas,
-  $packages    = $freighthop::params::packages,
-  $languages   = $freighthop::params::languages,
+  $ppas,
+  $packages,
+  $languages,
 ) {
   class { 'freighthop::params': } ->
   class { 'freighthop::packages':
