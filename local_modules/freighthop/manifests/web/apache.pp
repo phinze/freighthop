@@ -4,6 +4,7 @@ class freighthop::web::apache(
   $ssl_key_path,
   $server_name,
   $passenger_app_env,
+  $passenger_buffer_upload,
   $port                    = $freighthop::params::http_port,
   $ssl_port                = $freighthop::params::https_port,
   $upstream_port           = $freighthop::params::upstream_port,
@@ -11,7 +12,6 @@ class freighthop::web::apache(
   $group                   = $freighthop::params::gid,
   $web_root                = $freighthop::params::web_root,
   $passenger               = $freighthop::params::passenger,
-  $passenger_buffer_upload = $freighthop::params::passenger_buffer_upload,
 ) {
   class { '::apache':
     default_vhost => false,

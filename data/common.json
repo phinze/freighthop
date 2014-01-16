@@ -3,5 +3,6 @@
   "freighthop::ppas": [],
   "freighthop::packages": ["build-essential", "git"],
   "freighthop::languages": [],
-  "freighthop::web::apache::passenger_app_env": "development"
+  "freighthop::web::apache::passenger_app_env": "development",
+  "freighthop::web::apache::passenger_buffer_upload": true
 }
