@@ -1,7 +1,14 @@
 define freighthop::database::mysql::grant(
-  $user
+  $user = $title,
 ) {
-  mysql_grant { "freighthop_mysql_grant_for_${user}":
+  mysql_grant { "freighthop_mysql_grant_for_${user}_localhost":
+    ensure     => 'present',
+    options    => ['GRANT'],
+    privileges => ['ALL'],
+    table      => '*.*',
+    user       => "${user}@localhost",
+  }
+  mysql_grant { "freighthop_mysql_grant_for_${user}_external":
     ensure     => 'present',
     options    => ['GRANT'],
     privileges => ['ALL'],
