@@ -7,6 +7,12 @@
   # Points to the ruby interpreter that will be used to run applications
   PassengerDefaultRuby /home/vagrant/.rbenv/shims/ruby
 
+  # Passenger will run as vagrant, where rbenv is installed
+  PassengerDefaultUser vagrant
+
+  # Set the rack/rails environment
+  PassengerAppEnv <%= @passenger_app_env %>
+
   # Send uploads directly to Rack application without buffering them first.
   # Allows application to deal in streams for large uploads.
   # Requires Passenger 4.0.26 or higher; defaults to Off

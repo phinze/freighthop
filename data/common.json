@@ -2,5 +2,6 @@
   "classes": ["freighthop"],
   "freighthop::ppas": [],
   "freighthop::packages": ["build-essential", "git"],
-  "freighthop::languages": []
+  "freighthop::languages": [],
+  "freighthop::web::apache::passenger_app_env": "development"
 }

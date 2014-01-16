@@ -3,6 +3,7 @@ class freighthop::web::apache(
   $ssl_cert_path,
   $ssl_key_path,
   $server_name,
+  $passenger_app_env,
   $port                    = $freighthop::params::http_port,
   $ssl_port                = $freighthop::params::https_port,
   $upstream_port           = $freighthop::params::upstream_port,
