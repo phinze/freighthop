@@ -13,12 +13,10 @@
   # Set the rack/rails environment
   PassengerAppEnv <%= @passenger_app_env %>
 
-  # Whether or not to buffer file uploads before passing them through to passenger.
-  # Allows application to deal in streams for large uploads.
-  # Requires Passenger 4.0.26 or higher; defaults to On
-<% if @passenger_buffer_upload -%>
-  PassengerBufferUpload On
-<% else -%>
-  PassengerBufferUpload Off
+<% unless @passenger_config.empty? -%>
+  # Additional lines provided by Freighthop user
+<% @passenger_config.each do |line| -%>
+  <%= line %>
+<% end -%>
 <% end -%>
 </IfModule>
