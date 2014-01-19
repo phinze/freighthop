@@ -107,6 +107,7 @@ For now this is a tiny bash script that mostly just delegates down to `vagrant`.
 
 And it also knows a few special commands of its own:
 
+ * `fh init` - creates a blank config file
  * `fh run '$COMMAND'` - run a command from the CWD of your project on the VM
  * `fh console` - attempts to run a rails console inside the VM
  * `fh rake $TASK` - runs a rake task in your project on the VM
