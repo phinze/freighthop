@@ -25,12 +25,11 @@ With a few commands from the project root of any `{Ruby,Clojure}` web app, Freig
 
 ### Get the prerequisites
 
-* Vagrant 1.3.1
+* Vagrant >=1.3.1
 * A little speed boost:
   * `vagrant plugin install vagrant-cachier`
 * And for DNS magic:
   * `vagrant plugin install landrush`
-  * `vagrant landrush install`
 
 
 ### Install the gem
@@ -41,16 +40,27 @@ gem install freighthop
 
 ### Create config
 
-A Freighthop-enabled project just needs to include a `.freighthop.json` something like this:
+A Freighthop-enabled project just needs to include a `.freighthop.json` use `fh init` to generate one.
+
+```
+fh init
+```
+
+Configure `.freighthop.json` to something like this for rails and postgres:
 
 ```json
 {
-  "freighthop::languages": ["ruby"],
-  "freighthop::ruby_version": "2.0.0-p247",
-  "freighthop::web_port": 9292,  
+  "freighthop::cpus": 2,
+  "freighthop::ram": 512,
+  "freighthop::languages": [ "ruby" ],
+  "freighthop::language::ruby::version": "2.0.0-p247",
+  "freighthop::web::servers": [ "nginx" ],
+  "freighthop::web::nginx::upstream_port": 3000,
+  "freighthop::database::servers": [ "postgres" ],
+  "freighthop::database::postgres::databases": [ "myapp_development" ],
+  "freighthop::database::postgres::users": [ "myapp" ],
   "freighthop::packages": [
     "libpq-dev",
-    "libsqlite3-dev",
     "libxml2-dev",
     "libxslt1-dev",
     "nodejs"
@@ -97,6 +107,7 @@ For now this is a tiny bash script that mostly just delegates down to `vagrant`.
 
 And it also knows a few special commands of its own:
 
+ * `fh init` - creates a blank config file
  * `fh run '$COMMAND'` - run a command from the CWD of your project on the VM
  * `fh console` - attempts to run a rails console inside the VM
  * `fh rake $TASK` - runs a rake task in your project on the VM

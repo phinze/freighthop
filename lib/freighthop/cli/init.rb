@@ -20,16 +20,16 @@ class Freighthop::CLI::Init
 
   def default_config
     {
-      'freighthop::cpus'                         => 2,
-      'freighthop::ram'                          => 512,
-      'freighthop::languages'                    => ['ruby'],
-      'freighthop::web::servers'                 => ['nginx'],
-      'freighthop::web::nginx::upstream_port'    => 3000,
-      'freighthop::database::servers'            => ['postgres'],
-      'freighthop::database::postgres::db_names' => [],
-      'freighthop::database::postgres::users'    => [],
-      'freighthop::ppas'                         => [],
-      'freighthop::packages'                     => [],
+      'freighthop::cpus'                          => 2,
+      'freighthop::ram'                           => 512,
+      'freighthop::languages'                     => ['ruby'],
+      'freighthop::web::servers'                  => ['nginx'],
+      'freighthop::web::nginx::upstream_port'     => 3000,
+      'freighthop::database::servers'             => ['postgres'],
+      'freighthop::database::postgres::databases' => [],
+      'freighthop::database::postgres::users'     => [],
+      'freighthop::ppas'                          => [],
+      'freighthop::packages'                      => [ "libpq-dev" ],
     }
   end
 end
