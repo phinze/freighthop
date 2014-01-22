@@ -39,6 +39,7 @@ BUILT-IN COMMANDS
   ssh       - opens a root shell inside the project dir of the freighthop vm
   (other)   - see PASSTHROUGH TO VM below
   help      - this help
+  version   - freighthop version
 
 PASSTHROUGH TO VM
   Anything that does not match the above list will be passed through to the
