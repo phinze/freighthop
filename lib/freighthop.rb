@@ -59,6 +59,10 @@ module Freighthop
       end
     end
 
+    def provision_scripts
+      Freighthop::Config.fetch('freighthop::provision_scripts', [])
+    end
+
     def cpus
       Freighthop::Config.fetch('freighthop::cpus', 2)
     end

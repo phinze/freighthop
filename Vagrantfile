@@ -64,5 +64,9 @@ Vagrant.configure('2') do |config|
         'freighthop_gid' => Process.gid,
       }
     end
+
+    Freighthop.provision_scripts.each do |script|
+      node_config.vm.provision :shell, path: Freighthop.host_root.join(script).expand_path.to_s
+    end
   end
 end
