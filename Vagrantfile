@@ -12,8 +12,11 @@ Vagrant.configure('2') do |config|
 
   config.landrush.enable
 
-  config.cache.auto_detect = true
-  config.cache.enable_nfs = Freighthop.nfs?
+  config.cache.scope = :box
+  config.cache.synced_folder_opts = {
+    type: :nfs,
+    mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+  }
 
   config.ssh.forward_agent = true
 
