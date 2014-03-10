@@ -1,3 +1,5 @@
+require 'shellwords'
+
 class Freighthop::CLI::SSH
   def self.match?(*args)
     !args.empty? # we handle guest passthrough
@@ -12,7 +14,7 @@ class Freighthop::CLI::SSH
     if shell?
       ssh('-i')
     else
-      ssh(%Q(-c "#{@args.join(' ')}"))
+      ssh(%Q(-c "#{Shellwords.join(@args)}"))
     end
   end
 
