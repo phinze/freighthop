@@ -27,7 +27,7 @@ class Freighthop::CLI::SSH
   def config
     config_path.tap do |conf|
       if !conf.exist? || (Time.now - conf.mtime) > 86400
-        `vagrant ssh-config > #{conf}`
+        `vagrant ssh-config | sed 's/HostName .*$/HostName #{Freighthop.hostname}/' > #{conf}`
       end
     end
   end
