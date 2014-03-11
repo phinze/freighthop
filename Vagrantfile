@@ -19,6 +19,7 @@ Vagrant.configure('2') do |config|
   }
 
   config.ssh.forward_agent = true
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.define Freighthop.app_name do |node_config|
     node_config.vm.hostname = Freighthop.hostname
