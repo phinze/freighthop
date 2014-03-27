@@ -1,8 +1,13 @@
 class freighthop::database::postgres(
   $databases,
   $users,
+  $version = "9.1",
 ) {
-  include postgresql::server
+  class { 'postgresql::globals':
+    version => $version,
+    manage_package_repo => true
+  } ->
+  class { 'postgresql::server': }
 
   postgresql::server::pg_hba_rule { 'local-users-get-everything':
     type        => 'local',

@@ -1,0 +1,8 @@
+{
+  "freighthop::cpus": 2,
+  "freighthop::ram": 512,
+  "freighthop::database::servers": [ "postgres" ],
+  "freighthop::database::postgres::version": "9.3",
+  "freighthop::database::postgres::databases": [ "itworks" ],
+  "freighthop::database::postgres::users": [ "withausertoboot" ]
+}
