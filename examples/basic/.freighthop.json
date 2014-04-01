@@ -21,6 +21,6 @@
 
   ],
   "freighthop::packages": [
-    "libpq-dev"
+
   ]
 }

@@ -7,7 +7,8 @@ class freighthop::database::postgres(
     version => $version,
     manage_package_repo => true
   } ->
-  class { 'postgresql::server': }
+  class { 'postgresql::server': } ->
+  class { 'postgresql::lib::devel': }
 
   postgresql::server::pg_hba_rule { 'local-users-get-everything':
     type        => 'local',

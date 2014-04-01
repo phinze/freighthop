@@ -60,7 +60,6 @@ Configure `.freighthop.json` to something like this for rails and postgres:
   "freighthop::database::postgres::databases": [ "myapp_development" ],
   "freighthop::database::postgres::users": [ "myapp" ],
   "freighthop::packages": [
-    "libpq-dev",
     "libxml2-dev",
     "libxslt1-dev",
     "nodejs"
